@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo – Rústicos Nobre </title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:  #2c5f2e;
+      --green2: #3a7d44;
+      --gold:   #c8972a;
+      --cream:  #fdf8ef;
+      --dark:   #1a1a1a;
+      --gray:   #5a5a5a;
+      --border: #e0d8c8;
+      --whatsapp: #25d366;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+    }
+
+    /* ══════════════════════════════════
+       HEADER / NAV  – novo modelo
+    ══════════════════════════════════ */
+    header {
+      background: #fff;
+      position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 2px 14px rgba(0,0,0,.13);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 72px;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 16px;
+    }
+
+    /* ── Logo ── */
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .header-logo img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+    }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-text .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1.15;
+    }
+    .logo-text .tagline {
+      font-size: .72rem;
+      color: var(--gray);
+      letter-spacing: .3px;
+      font-style: italic;
+    }
+
+    /* ── Nav desktop ── */
+    .nav-desktop {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 4px;
+      flex: 1;
+      justify-content: center;
+    }
+    .nav-desktop > li { position: relative; }
+    .nav-desktop > li > a {
+      display: block;
+      padding: 8px 14px;
+      color: var(--dark);
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      border-radius: 5px;
+      transition: color .2s, background .2s;
+      white-space: nowrap;
+    }
+    .nav-desktop > li > a:hover { color: var(--green); background: rgba(44,95,46,.07); }
+
+    /* Dropdown Categorias */
+    .has-drop > a::after { content: ' ▾'; font-size: .65rem; }
+    .drop-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 0;
+      min-width: 210px;
+      box-shadow: 0 10px 32px rgba(0,0,0,.14);
+      z-index: 300;
+    }
+    .drop-menu a {
+      display: block;
+      padding: 12px 20px;
+      color: var(--dark);
+      text-decoration: none;
+      font-size: .88rem;
+      font-weight: 600;
+      transition: background .15s, color .15s;
+    }
+    .drop-menu a:hover { background: var(--cream); color: var(--green); }
+    .has-drop:hover .drop-menu { display: block; }
+
+    /* ── Header right ── */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    /* Botão Comprar Agora */
+    .btn-comprar {
+      background: var(--green);
+      color: #fff;
+      border: none;
+      padding: 11px 22px;
+      border-radius: 50px;
+      font-size: .88rem;
+      font-weight: 700;
+      letter-spacing: .4px;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+      white-space: nowrap;
+      font-family: 'Lato', sans-serif;
+    }
+    .btn-comprar:hover { background: var(--green2); transform: translateY(-1px); }
+
+    /* Dropdown comprar */
+    #opcoesCompra {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 44px; /* to the left of hamburger */
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 8px 0;
+      box-shadow: 0 12px 40px rgba(0,0,0,.18);
+      z-index: 9999;
+      min-width: 270px;
+    }
+    #opcoesCompra.open { display: block; }
+    #opcoesCompra a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 20px;
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .88rem;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background .15s;
+    }
+    #opcoesCompra a:last-child { border-bottom: none; }
+    #opcoesCompra a:hover { background: var(--cream); }
+
+    /* ── Hambúrguer ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      transition: background .2s;
+    }
+    .hamburger:hover { background: rgba(0,0,0,.06); }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2.5px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    /* ── Mobile nav overlay ── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 72px 0 0 0;
+      background: #fff;
+      z-index: 190;
+      overflow-y: auto;
+      padding: 24px 0 40px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.15);
+    }
+    .mobile-nav.open { display: block; }
+    .mobile-nav a {
+      display: block;
+      padding: 16px 28px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark);
+      text-decoration: none;
+      letter-spacing: .4px;
+      border-bottom: 1px solid var(--border);
+      transition: color .2s, background .2s;
+    }
+    .mobile-nav a:hover { color: var(--green); background: var(--cream); }
+    .mobile-nav .mob-category-label {
+      padding: 12px 28px 4px;
+      font-size: .72rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    .mobile-nav .mob-buy-links { padding: 16px 20px; display: flex; flex-direction: column; gap: 10px; }
+    .mobile-nav .mob-buy-btn {
+      display: block;
+      text-align: center;
+      background: var(--green);
+      color: #fff;
+      padding: 14px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: .9rem;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .mobile-nav .mob-buy-btn:hover { background: var(--green2); border-bottom: none; }
+
+    /* ── HERO BAND ── */
+    .hero {
+      background: linear-gradient(135deg, #1e4020 0%, var(--green) 50%, #2d6632 100%);
+      padding: 72px 48px 64px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      color: #fff; font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900; line-height: 1.15;
+      margin-bottom: 28px; position: relative;
+    }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero-desc {
+      max-width: 740px; margin: 0 auto 32px;
+      color: rgba(255,255,255,.82); font-size: 1rem; line-height: 1.8;
+      position: relative;
+    }
+    .hero-desc strong { color: #fff; }
+    .btn-hero {
+      display: inline-block;
+      background: var(--gold); color: #fff;
+      padding: 16px 40px; border-radius: 6px;
+      font-size: 1rem; font-weight: 700; letter-spacing: .5px;
+      text-decoration: none; text-transform: uppercase;
+      box-shadow: 0 6px 20px rgba(0,0,0,.3);
+      transition: transform .2s, box-shadow .2s;
+      position: relative;
+    }
+    .btn-hero:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.4); }
+
+    /* ── BADGES ── */
+    .badges {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0; background: var(--green2);
+    }
+    .badge {
+      padding: 28px 24px; text-align: center;
+      border-right: 1px solid rgba(255,255,255,.15);
+    }
+    .badge:last-child { border-right: none; }
+    .badge-icon { font-size: 2rem; margin-bottom: 10px; }
+    .badge h3 {
+      color: #fff; font-size: .95rem; font-weight: 700;
+      letter-spacing: .4px; margin-bottom: 4px;
+    }
+    .badge p { color: rgba(255,255,255,.7); font-size: .8rem; line-height: 1.5; }
+
+    /* ── CATALOG SECTION ── */
+    .catalog-section { padding: 60px 32px; max-width: 1300px; margin: 0 auto; }
+    .catalog-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      color: var(--green); text-align: center;
+      margin-bottom: 48px; position: relative;
+    }
+    .catalog-section h2::after {
+      content: ''; display: block; width: 60px; height: 3px;
+      background: var(--gold); margin: 14px auto 0;
+    }
+
+    /* ── PRODUCT GRID ── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
+    @media (max-width: 700px) {
+      .products-grid { grid-template-columns: 1fr; gap: 20px; }
+    }
+
+    /* ── PRODUCT CARD ── */
+    .product-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: box-shadow .25s, transform .25s;
+      display: flex; flex-direction: column;
+    }
+    .product-card:hover {
+      box-shadow: 0 12px 40px rgba(44,95,46,.15);
+      transform: translateY(-3px);
+    }
+
+    /* ── CAROUSEL ── */
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      background: #f2ede3;
+    }
+    .carousel-track {
+      display: flex;
+      height: 100%;
+      transition: transform .4s ease;
+      will-change: transform;
+    }
+    .carousel-slide {
+      min-width: 100%;
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+    }
+    @media (max-width: 600px) {
+      .carousel { height: 260px; }
+    }
+    .carousel-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,.35); color: #fff;
+      border: none; cursor: pointer;
+      width: 34px; height: 34px; border-radius: 50%;
+      font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity .2s;
+      z-index: 3;
+    }
+    .carousel:hover .carousel-btn { opacity: 1; }
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+    /* dots INSIDE the image */
+    .carousel-dots {
+      position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 6px; z-index: 3;
+    }
+    .carousel-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.5); cursor: pointer;
+      transition: background .2s, transform .2s;
+      border: 1px solid rgba(255,255,255,.4);
+    }
+    .carousel-dot.active { background: #fff; transform: scale(1.25); }
+    /* cursor pointer on image */
+    .carousel-slide { cursor: zoom-in; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,.93);
+      flex-direction: column; align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-track-wrap {
+      width: 100%; max-width: 700px;
+      overflow: hidden; position: relative;
+    }
+    .lightbox-track {
+      display: flex; transition: transform .4s ease;
+      will-change: transform;
+    }
+    .lightbox-slide {
+      min-width: 100%; display: flex;
+      align-items: center; justify-content: center;
+      padding: 0 12px;
+    }
+    .lightbox-slide img {
+      max-width: 100%; max-height: 75vh;
+      object-fit: contain; border-radius: 10px;
+    }
+    .lightbox-dots {
+      display: flex; gap: 8px; margin-top: 18px;
+    }
+    .lightbox-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: rgba(255,255,255,.4); cursor: pointer;
+      transition: background .2s;
+    }
+    .lightbox-dot.active { background: #fff; }
+    .lightbox-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,.15); color: #fff;
+      border: none; cursor: pointer;
+      width: 44px; height: 44px; border-radius: 50%;
+      font-size: 1.4rem; display: flex; align-items: center; justify-content: center;
+      z-index: 2; transition: background .2s;
+    }
+    .lightbox-btn:hover { background: rgba(255,255,255,.3); }
+    .lightbox-btn.prev { left: 8px; }
+    .lightbox-btn.next { right: 8px; }
+    .lightbox-close {
+      position: absolute; top: 16px; right: 20px;
+      background: none; border: none; color: #fff;
+      font-size: 2rem; cursor: pointer; line-height: 1;
+      opacity: .8; transition: opacity .2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-counter {
+      color: rgba(255,255,255,.6); font-size: .85rem; margin-top: 10px;
+    }
+
+    /* ── CARD INFO ── */
+    .card-info {
+      padding: 20px 20px 24px;
+      display: flex; flex-direction: column; flex: 1;
+    }
+    .card-code {
+      font-size: .72rem; color: var(--gray); letter-spacing: 1px;
+      text-transform: uppercase; font-weight: 700; margin-bottom: 4px;
+    }
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--green); margin-bottom: 8px;
+    }
+    .btn-buy {
+      margin-top: auto;
+      display: block; text-align: center;
+      background: var(--green); color: #fff;
+      padding: 12px 0; border-radius: 6px;
+      font-size: .9rem; font-weight: 700;
+      text-decoration: none; letter-spacing: .4px;
+      transition: background .2s;
+    }
+    .btn-buy:hover { background: var(--green2); }
+
+    /* ── FAQ ── */
+    .faq-section {
+      background: var(--green);
+      padding: 72px 32px;
+    }
+    .faq-inner { max-width: 820px; margin: 0 auto; }
+    .faq-inner h2 {
+      font-family: 'Playfair Display', serif;
+      color: #fff; text-align: center;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: 8px;
+    }
+    .faq-inner .faq-subtitle {
+      color: rgba(255,255,255,.7); text-align: center;
+      font-size: .95rem; margin-bottom: 40px;
+    }
+    .faq-item {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px; margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%; background: none; border: none;
+      padding: 20px 24px; text-align: left;
+      color: #fff; font-size: .95rem; font-weight: 700;
+      cursor: pointer; display: flex; justify-content: space-between;
+      align-items: center; font-family: 'Lato', sans-serif;
+    }
+    .faq-q .arrow {
+      font-size: 1rem; transition: transform .3s;
+      flex-shrink: 0; margin-left: 12px;
+    }
+    .faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s ease, padding .35s;
+      color: rgba(255,255,255,.8); font-size: .9rem; line-height: 1.7;
+      padding: 0 24px;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 24px 20px; }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: linear-gradient(135deg, #1e3020, var(--green));
+      padding: 64px 32px; text-align: center;
+    }
+    .cta-band p {
+      font-family: 'Playfair Display', serif;
+      color: #fff; font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      max-width: 700px; margin: 0 auto 32px; line-height: 1.6;
+    }
+    .btn-cta {
+      display: inline-block;
+      background: var(--gold); color: #fff;
+      padding: 16px 44px; border-radius: 6px;
+      font-size: 1rem; font-weight: 700; text-decoration: none;
+      text-transform: uppercase; letter-spacing: .5px;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,.3);
+    }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.4); }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      background: #fff; padding: 56px 32px; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .newsletter p { color: var(--gray); font-size: .95rem; margin-bottom: 12px; }
+    .newsletter h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; color: var(--green); margin-bottom: 28px;
+    }
+    .newsletter-form { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .newsletter-form input {
+      padding: 14px 20px; border: 1.5px solid var(--border);
+      border-radius: 6px; font-size: .95rem; width: 280px;
+      outline: none; font-family: 'Lato', sans-serif;
+    }
+    .newsletter-form input:focus { border-color: var(--green2); }
+    .newsletter-form button {
+      background: var(--green); color: #fff;
+      padding: 14px 28px; border: none; border-radius: 6px;
+      font-size: .95rem; font-weight: 700; cursor: pointer;
+      transition: background .2s;
+    }
+    .newsletter-form button:hover { background: var(--green2); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111; color: rgba(255,255,255,.65);
+      padding: 52px 48px 28px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px; margin-bottom: 40px;
+    }
+    .footer-brand h2 {
+      font-family: 'Playfair Display', serif;
+      color: #fff; font-size: 1.4rem; margin-bottom: 12px;
+    }
+    .footer-brand h2 span { color: var(--gold); }
+    .footer-brand p { font-size: .88rem; line-height: 1.7; max-width: 320px; }
+    .footer-col h4 {
+      color: #fff; font-size: .8rem; letter-spacing: 1.2px;
+      text-transform: uppercase; font-weight: 700; margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a {
+      color: rgba(255,255,255,.6); text-decoration: none; font-size: .88rem;
+      transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-col address { font-style: normal; font-size: .88rem; line-height: 1.7; }
+    .footer-col .phone { color: #fff; font-weight: 700; margin-bottom: 8px; }
+    .footer-col .email a { color: rgba(255,255,255,.6); text-decoration: none; font-size: .88rem; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 24px; text-align: center; font-size: .8rem;
+    }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      background: var(--whatsapp); color: #fff;
+      width: 58px; height: 58px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; text-decoration: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,.35);
+      animation: pulse 2.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 4px 16px rgba(37,211,102,.4); }
+      50% { box-shadow: 0 4px 28px rgba(37,211,102,.75); }
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,.6); align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #fff; border-radius: 12px;
+      padding: 40px 36px; max-width: 480px; width: 92%;
+      position: relative; text-align: center;
+    }
+    .modal h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--green); font-size: 1.5rem; margin-bottom: 12px;
+    }
+    .modal p { color: var(--gray); font-size: .92rem; margin-bottom: 24px; line-height: 1.6; }
+    .modal-agents {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-bottom: 8px;
+    }
+    .agent-card {
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px 12px; text-align: center;
+    }
+    .agent-card img {
+      width: 64px; height: 64px; border-radius: 50%;
+      object-fit: cover; margin-bottom: 8px;
+    }
+    .agent-card h4 { font-size: .88rem; color: var(--dark); margin-bottom: 4px; }
+    .agent-card span { font-size: .75rem; color: var(--gray); display: block; margin-bottom: 10px; }
+    .agent-card a {
+      display: block; background: var(--whatsapp); color: #fff;
+      padding: 8px 0; border-radius: 5px; text-decoration: none;
+      font-size: .8rem; font-weight: 700;
+    }
+    .modal-close {
+      position: absolute; top: 14px; right: 18px;
+      background: none; border: none; font-size: 1.4rem;
+      cursor: pointer; color: var(--gray); line-height: 1;
+    }
+
+    /* ══════════════════════════════════
+       RESPONSIVO
+    ══════════════════════════════════ */
+    @media (max-width: 900px) {
+      .nav-desktop { display: none; }
+      .hamburger { display: flex; }
+      #opcoesCompra { right: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .header-inner { padding: 0 16px; height: 64px; }
+      .logo-text .brand { font-size: 1rem; }
+      .btn-comprar { padding: 9px 14px; font-size: .8rem; }
+      .badges { grid-template-columns: 1fr 1fr; }
+      .badge { border-right: none; border-bottom: 1px solid rgba(255,255,255,.15); }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero { padding: 52px 24px 48px; }
+      .catalog-section { padding: 40px 20px; }
+      footer { padding: 40px 24px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     HEADER
+══════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+
+    <!-- Logo -->
+    <a class="header-logo" href="#">
+      <img
+        src="https://artesdocampomg.com.br/wp-content/uploads/2024/07/NR-logo.png"
+        onerror="this.style.display='none'"
+        alt="NR Logo"
+      />
+      <div class="logo-text">
+<span class="brand" style="display: block;">
+    Rústicos Nobre
+</span>
+<span class="brand" style="display: block; margin-top: 4px;">
+    & Cultura do Vaquero
+</span>
+        <span class="tagline">Arte rural esculpida à mão</span>
+      </div>
+    </a>
+
+    <!-- Nav Desktop -->
+    <ul class="nav-desktop">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li class="has-drop">
+        <a href="#">Categorias</a>
+        <div class="drop-menu">
+          <a href="#boi">🐂&nbsp; Boi Mija</a>
+          <a href="#cavalo">🐴&nbsp; Cavalo Mija</a>
+          <a href="#cabrita">🐐&nbsp; Cabrita Mija Pinga</a>
+        </div>
+      </li>
+      <li><a href="#equipe">Equipe</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="https://wa.link/zdxqdm" target="_blank">Suporte</a></li>
+    </ul>
+
+    <!-- Right: botão comprar + hambúrguer -->
+    <div class="header-right">
+      <button class="btn-comprar" onclick="toggleComprar(event)">Comprar Agora</button>
+
+      <!-- Dropdown de compra -->
+      <div id="opcoesCompra">
+       
+        <a href="https://wa.link/zdxqdm" target="_blank">💬 Falar no WhatsApp</a>
+        <a href="https://wa.me/351939799936?text=Minha%20chave%20Pix%20%C3%A9%3A%20xtreambr@gmail.com" target="_blank">💰 Pagar com Mbway</a>
+      </div>
+
+      <!-- Hambúrguer -->
+      <div class="hamburger" id="hamburger" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.htm">🏠 Home</a>
+  <a href="#catalogo">📋 Catálogo</a>
+  
+  <a href="#equipe">👥 Equipe</a>
+  <a href="#sobre">ℹ️ Sobre</a>
+  <a href="https://wa.link/zdxqdm" target="_blank">💬 Suporte</a>
+  
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Conheça nosso <em>catálogo</em></h1>
+  <p class="hero-desc">
+    Boi Corote Mija Pinga da Rústicis Nobre é uma peça de arte excepcionalmente elaborada, utilizando uma variedade de materiais para capturar a beleza e a majestade dos bovinos. São utilizados materiais como: plástico, borracha, ferro, gesso, tinta a óleo, verniz e cabresto ornamentado com corrente e couro com uma base de madeira guajará.<br><br>
+    <strong>Medidas: 43 cm de altura · 17 cm de largura · 45 cm de comprimento · Base madeiraMdf 3/mm 15×35 cm · Capacidade interna: até 2 litros.</strong>
+  </p>
+  <a href="#" class="btn-hero" onclick="openModal(); return false;">🐂 Quero Garantir o meu Boi Corote</a>
+</section>
+
+<!-- BADGES -->
+<div class="badges">
+  <div class="badge">
+    <div class="badge-icon">💳</div>
+    <h3>Parcele em até 10x</h3>
+    <p>Facilitamos a sua compra em até 10x com Wise .</p>
+  </div>
+  <div class="badge">
+    <div class="badge-icon">🚚</div>
+    <h3>Envio para todo o Portugal,Ilha,Continente</h3>
+    <p>Entregamos em todo País com excelência e qualidade.</p>
+  </div>
+  <div class="badge">
+    <div class="badge-icon">🕐</div>
+    <h3>Suporte 24h</h3>
+    <p>Suporte 24 horas personalizado para a sua necessidade.</p>
+  </div>
+  <div class="badge">
+    <div class="badge-icon">🔒</div>
+    <h3>Compre sem sair de casa</h3>
+    <a href="https://www.digicert.com/" target="_blank" rel="noopener noreferrer">
+        <img src="https://raw.githubusercontent.com/Waldemylson/Selo-seguran-a-1/main/images.jpeg" 
+             alt="Selo de Segurança" 
+             width="200" 
+             height="auto"
+             style="max-width: 100%; height: auto;">
+    </a>
+    
+    <p style="margin: 10px 0 0 0; font-size: 13px; color: #ffffff;">
+        Site protegido por SSL • Confiança garantida
+    </p>
+</div>
+</div>
+
+<!-- CATALOG -->
+<section class="catalog-section" id="catalogo">
+  <h2>Nosso Catálogo</h2>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <h2>Perguntas Frequentes</h2>
+    <p class="faq-subtitle">Confira abaixo as dúvidas mais comuns</p>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Como personalizo um produto?<span class="arrow">▾</span></button>
+      <div class="faq-a">Todo produto personalizado deve ser consultado com um de nossos especialistas para que toda a personalização esteja de acordo com o gosto do cliente.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Quais as condições de pagamento?<span class="arrow">▾</span></button>
+      <div class="faq-a">Pagamentos à vista via Wise ou plataformas MB ou tranferencua Iban. Com a possibilidade de dividir o valor em até 10 vezes no Cartão de Crédito.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Como rastrear a minha entrega?<span class="arrow">▾</span></button>
+      <div class="faq-a">Após embalar o seu pedido, iremos enviar o código de rastreio via WhatsApp ou por e-mail para que possa acompanhar o percurso e entrega do seu pedido.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Consigo pagar online direto?<span class="arrow">▾</span></button>
+      <div class="faq-a">Com a nossa loja em funcionamento, você poderá fazer o seu carrinho personalizado e pagar direto no site sem precisar passar por um consultor.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Como faço para realizar a compra?<span class="arrow">▾</span></button>
+      <div class="faq-a">A compra pode ser realizada através das redes sociais falando com um de nossos consultores ou através do site. Também temos outras opções como nossos parceiros em deras e eventos.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Qual é o material do Touro Corote?<span class="arrow">▾</span></button>
+      <div class="faq-a">São utilizados materiais como: plástico, borracha, ferro, gesso, tinta a óleo, verniz e cabresto ornamentado com corrente e couro com uma base de madeira Mdf 3/mm.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Quais as medidas?<span class="arrow">▾</span></button>
+      <div class="faq-a">43 cm de altura; 17 cm de largura; 45 cm de comprimento; sobre uma base de madeira guajará com 15 cm de largura e 35 cm de comprimento. Armazenamento interno com capacidade de até 2 litros.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Como será o processo de entrega?<span class="arrow">▾</span></button>
+      <div class="faq-a">Será enviado via Correios (PAC ou Sedex) ou através de uma transportadora. O cliente também terá a opção de recolher o produto presencialmente com nossa equipe, informando previamente uma data.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <p>Não perca a oportunidade de possuir uma peça exclusiva que é mais do que decoração — é uma conexão autêntica com o artesanato rural. Junte-se à nossa comunidade de apaixonados por "Boi Mija Pinga" da Rústicos Nobre.</p>
+  <a href="#" class="btn-cta" onclick="openModal(); return false;">Entre em Contato</a>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <p>Gostaria de receber promoções e cupons?</p>
+  <h3>Inscreva-se agora mesmo</h3>
+  <div class="newsletter-form">
+    <input type="email" placeholder="Seu melhor e-mail" />
+    <button>Inscrever-se</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h2>Rústicos <span>Nóbre</span></h2>
+      <p>Inovação no melhor do artesanato agro. Nosso compromisso é oferecer produtos únicos que conectam tradição e arte.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Visite</h4>
+      <ul>
+        <li><a href="#">Página Inicial</a></li>
+        <li><a href="#">Sobre Rústicos Nóbre</a></li>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+        <li><a href="#">Contatos</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Endereço</h4>
+      <address>Estrada das Varzeas, Casal S. José 2070-002 Cartaxo-Santarém<br></address>
+      <br>
+      <h4>Contato</h4>
+      <p class="phone">+351 939799936</p>
+      <p class="email"><a href="/cdn-cgi/l/email-protection#a5d7d0d6d1ccc6cad6c8cad3c0ccd69497e5c2c8c4ccc98bc6cac8"><span class="__cf_email__" data-cfemail="0d7f787e79646e627e60627b68647e3c3f4d6a606c6461236e6260">[email&#160;protected]</span></a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Copyright © 2024 Rústicos Nóbre.Cultura do Vaquero Oficial, Todos os direitos reservados</p>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a class="wa-float" href="https://wa.link/zdxqdm" target="_blank" title="Suporte WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <div class="lightbox-track-wrap" id="lbWrap">
+    <div class="lightbox-track" id="lbTrack"></div>
+    <button class="lightbox-btn prev" onclick="lbShift(-1)">&#8249;</button>
+    <button class="lightbox-btn next" onclick="lbShift(1)">&#8250;</button>
+  </div>
+  <div class="lightbox-dots" id="lbDots"></div>
+  <div class="lightbox-counter" id="lbCounter"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2>Escolha seu Especialista</h2>
+    <p>Selecione um de nossos consultores para dar continuidade ao seu atendimento.</p>
+    <div class="modal-agents">
+      <div class="agent-card">
+        <img src="https://artesdocampomg.com.br/wp-content/uploads/2024/07/3.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Bruna+Evelyn&background=2c5f2e&color=fff&size=64'" alt="Bruna Evelyn" />
+        <h4>Bruna Evelyn</h4>
+        <span>Gerente Comercial</span>
+        <a href="https://wa.link/zdxqdm" target="_blank">📲 Contato</a>
+      </div>
+      <div class="agent-card">
+        <img src="https://artesdocampomg.com.br/wp-content/uploads/2024/07/12.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Pedro+Lemos&background=2c5f2e&color=fff&size=64'" alt="Pedro Lemos" />
+        <h4>Pedro Lemos</h4>
+        <span>Gerente Administrativo</span>
+        <a href="https://wa.link/zdxqdm" target="_blank">📲 Contato</a>
+      </div>
+      <div class="agent-card">
+        <img src="https://artesdocampomg.com.br/wp-content/uploads/2024/07/2.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Beatriz+Pereira&background=2c5f2e&color=fff&size=64'" alt="Beatriz Pereira" />
+        <h4>Beatriz Pereira</h4>
+        <span>Consultora de Vendas</span>
+        <a href="https://wa.link/zdxqdm" target="_blank">📲 Contato</a>
+      </div>
+      <div class="agent-card">
+        <img src="https://artesdocampomg.com.br/wp-content/uploads/2024/07/6-1.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Maxmilian&background=2c5f2e&color=fff&size=64'" alt="Maxmilian" />
+        <h4>Maxmilian</h4>
+        <span>Consultor de Vendas</span>
+        <a href="https://wa.link/zdxqdm" target="_blank">📲 Contato</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ── PRODUCT DATA ── */
+const BASE = 'https://artesdocampomg.com.br/wp-content/uploads/2024/07/';
+const products = [
+  { code:'TC-001', name:'Gir Leiteiro',        imgs:['TC-001.jpg','TC-001-3.jpg','TC-001-1.jpg','TC-001-2.jpg'] },
+  { code:'TC-002', name:'Nelore Pintado',       imgs:['TC-002-4.jpg','TC-002.jpg','TC-002-1.jpg','TC-002-2.jpg','TC-002-3.jpg'] },
+  { code:'TC-003', name:'Gir Leiteiro',         imgs:['TC-003.jpg','TC-003-1.jpg','TC-003-2.jpg','TC-003-3.jpg','TC-003-4.jpg'] },
+  { code:'TC-004', name:'Guzerá',               imgs:['TC-004.jpg','TC-004-1.jpg','TC-004-2.jpg','TC-004-3.jpg','TC-004-4.jpg'] },
+  { code:'TC-005', name:'Nelore',               imgs:['TC-005.jpg','TC-005-1.jpg','TC-005-2.jpg','TC-005-3.jpg'] },
+  { code:'TC-006', name:'Nelore',               imgs:['TC-006.jpg','TC-006-1.jpg','TC-006-2.jpg','TC-006-3.jpg','TC-003-5.jpg'] },
+  { code:'TC-007', name:'Boi Bandido',          imgs:['TC-007.jpg','TC-007-1.jpg','TC-007-2.jpg','TC-007-3.jpg'] },
+  { code:'TC-008', name:'Nelore Pintado',       imgs:['TC-008.jpg','TC-008-1.jpg','TC-008-2.jpg','TC-008-3.jpg','TC-008-4.jpg'] },
+  { code:'TC-009', name:'Nelore Pintado',       imgs:['TC-009.jpg','TC-009-1.jpg','TC-009-2.jpg','TC-009-3.jpg','TC-009-4.jpg'] },
+  { code:'TC-010', name:'Nelore',               imgs:['TC-010-3.jpg','TC-010.jpg','TC-010-1.jpg','TC-010-2.jpg'] },
+  { code:'TC-012', name:'Crioulo Lageano',      imgs:['TC-012.jpg','TC-012-1.jpg','TC-012-2.jpg','TC-012-3.jpg','TC-012-4.jpg'] },
+  { code:'TC-013', name:'Nelore Pintado',       imgs:['TC-013-4.jpg','TC-013.jpg','TC-013-1.jpg','TC-013-2.jpg','TC-013-3.jpg'] },
+  { code:'TC-014', name:'Tabapuã',              imgs:['TC-014-1.jpg','TC-014-2.jpg','TC-014-3.jpg','TC-014-4.jpg','TC-014.jpg'] },
+  { code:'TC-015', name:'Braford',              imgs:['TC-015-4.jpg','TC-015.jpg','TC-015-1.jpg','TC-015-2.jpg','TC-015-3.jpg'] },
+  { code:'TC-016', name:'Sardo Negro',          imgs:['TC-016.jpg','TC-016-1.jpg','TC-016-2.jpg','TC-016-3.jpg','TC-016-4.jpg'] },
+  { code:'TC-017', name:'Boi Soberano',         imgs:['TC-017.jpg','TC-017-1.jpg','TC-017-2.jpg','TC-017-3.jpg','TC-017-4.jpg'] },
+  { code:'TC-018', name:'Simental',             imgs:['TC-018.jpg','TC-018-1.jpg','TC-018-2.jpg','TC-018-3.jpg'] },
+  { code:'TC-019', name:'Holandês',             imgs:['TC-019.jpg','TC-019-1.jpg','TC-019-2.jpg','TC-019-3.jpg'] },
+  { code:'TC-020', name:'Curraleiro Pé Duro',   imgs:['TC-020.jpg','TC-020-1.jpg','TC-020-2.jpg','TC-020-3.jpg'] },
+  { code:'TC-021', name:'Nelore Pintado',       imgs:['TC-021.jpg','TC-021-1.jpg','TC-021-2.jpg','TC-021-3.jpg'] },
+  { code:'TC-022', name:'Nelore',               imgs:['TC022-1.jpg','TC022-2.jpg','TC022-3-copiar.jpg','TC022-3.jpg'] },
+  { code:'TC-023', name:'Caracu',               imgs:['TC023-1.jpg','TC023-2.jpg','TC023-3.jpg','TC023-4.jpg','TC023-5.jpg'] },
+  { code:'TC-024', name:'Gir Leiteiro',         imgs:['TC024-1.jpg','TC024-2.jpg','TC024-3.jpg','TC024-4.jpg','TC024-5.jpg'] },
+  { code:'TC-025', name:'Senepol',              imgs:['TC025-1.jpg','TC025-2.jpg','TC025-3.jpg','TC025-4.jpg','TC025-5.jpg'] },
+  { code:'TC-026', name:'Sindi',                imgs:['TC026-1.jpg','TC026-2.jpg','TC026-3.jpg','TC026-4.jpg','TC026-5.jpg'] },
+  { code:'TC-028', name:'Angus',                imgs:['TC028-1.jpg','TC028-2.jpg','TC028-3.jpg','TC028-4.jpg','TC028-5.jpg'] },
+  { code:'TC-029', name:'Crioulo Lageano',      imgs:['TC029-1.jpg','TC029-2.jpg','TC029-3.jpg'] },
+  { code:'TC-030', name:'Miura',                imgs:['TC030.jpg','TC030-1.jpg','TC030-2.jpg','TC030-3.jpg'] },
+  { code:'TC-031', name:'Indu Brasil',          imgs:['TC031-1.jpg','TC031-2.jpg','TC031-3.jpg','TC031-4.jpg'] },
+  { code:'TC-032', name:'Girolando',            imgs:['GIROLANDO-5.jpg','GIROLANDO-1.jpg','GIROLANDO-2.jpg','GIROLANDO-3.jpg','GIROLANDO-4.jpg'] },
+  { code:'TC-034', name:'Brahman',              imgs:['brahman-1.jpg','brahman-2.jpg','brahman-3.jpg','brahman-4.jpg'] },
+  { code:'TC-035', name:'Nelore',               imgs:['035-1.jpg','035-7.jpg','035-2.jpg','035-3.jpg','035-4.jpg','035-5.jpg','035-6.jpg'] },
+  { code:'TC-039', name:'Boran',                imgs:['BORAN-1.jpg','BOORAN-5.jpg','BOORAN-2.jpg','BOORAN-3.jpg','BOORAN-4.jpg'] },
+  { code:'TC-040', name:'Tucura',               imgs:['TUCURA-6.jpg','TUCURA-1.jpg','TUCURA-2.jpg','TUCURA-3.jpg','TUCURA-4.jpg','TUCURA-5.jpg'] },
+];
+
+/* ── BUILD CARDS ── */
+const grid = document.getElementById('productsGrid');
+const carouselStates = {};
+
+products.forEach((p, idx) => {
+  carouselStates[idx] = 0;
+  const slideTags = p.imgs.map((img, i) =>
+    `<div class="carousel-slide" onclick="openLightbox(${idx},${i})"><img src="${BASE}${img}" alt="${p.name} ${i+1}" loading="lazy" /></div>`
+  ).join('');
+  const dots = p.imgs.map((_, i) =>
+    `<span class="carousel-dot${i===0?' active':''}" onclick="goTo(${idx},${i})"></span>`
+  ).join('');
+  grid.innerHTML += `
+    <div class="product-card">
+      <div class="carousel" id="c${idx}">
+        <div class="carousel-track" id="track${idx}">${slideTags}</div>
+        <button class="carousel-btn prev" onclick="shift(${idx},-1)">&#8249;</button>
+        <button class="carousel-btn next" onclick="shift(${idx},1)">&#8250;</button>
+        <div class="carousel-dots" id="dots${idx}">${dots}</div>
+      </div>
+      <div class="card-info">
+        <p class="card-code">${p.code}</p>
+        <h3 class="card-name">${p.name}</h3>
+        <a class="btn-buy" href="#" onclick="openModal(); return false;">🛒 Compre agora</a>
+      </div>
+    </div>`;
+});
+
+function goTo(idx, pos) {
+  const total = products[idx].imgs.length;
+  pos = ((pos % total) + total) % total;
+  carouselStates[idx] = pos;
+  document.getElementById('track'+idx).style.transform = `translateX(-${pos*100}%)`;
+  document.querySelectorAll(`#dots${idx} .carousel-dot`).forEach((d,i) => {
+    d.classList.toggle('active', i===pos);
+  });
+}
+function shift(idx, dir) { goTo(idx, carouselStates[idx] + dir); }
+
+/* ── SWIPE SUPPORT ── */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.carousel').forEach(car => {
+    let startX = 0;
+    car.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+    car.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) {
+        const idx = parseInt(car.id.replace('c',''));
+        shift(idx, dx < 0 ? 1 : -1);
+      }
+    });
+  });
+});
+
+/* ── AUTO-ADVANCE ── */
+setInterval(() => { products.forEach((_,i) => shift(i,1)); }, 4500);
+
+/* ── LIGHTBOX ── */
+let lbIdx = 0, lbPos = 0;
+
+function openLightbox(idx, pos) {
+  lbIdx = idx;
+  const p = products[idx];
+  const lbTrack = document.getElementById('lbTrack');
+  const lbDots  = document.getElementById('lbDots');
+  lbTrack.innerHTML = p.imgs.map((img,i) =>
+    `<div class="lightbox-slide"><img src="${BASE}${img}" alt="${p.name} ${i+1}" /></div>`
+  ).join('');
+  lbDots.innerHTML = p.imgs.map((_,i) =>
+    `<span class="lightbox-dot" onclick="lbGoTo(${i})"></span>`
+  ).join('');
+  lbGoTo(pos);
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function lbGoTo(pos) {
+  const total = products[lbIdx].imgs.length;
+  pos = ((pos % total) + total) % total;
+  lbPos = pos;
+  document.getElementById('lbTrack').style.transform = `translateX(-${pos*100}%)`;
+  document.querySelectorAll('#lbDots .lightbox-dot').forEach((d,i) => d.classList.toggle('active', i===pos));
+  document.getElementById('lbCounter').textContent = `${pos+1} / ${total}`;
+}
+function lbShift(dir) { lbGoTo(lbPos + dir); }
+
+// Swipe no lightbox
+(function(){
+  const wrap = document.getElementById('lbWrap');
+  if (!wrap) return;
+  let sx = 0;
+  wrap.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
+  wrap.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - sx; if(Math.abs(dx)>40) lbShift(dx<0?1:-1); });
+})();
+
+document.getElementById('lightbox').addEventListener('click', e => {
+  if (e.target.id === 'lightbox') closeLightbox();
+});
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key==='ArrowRight') lbShift(1);
+  if (e.key==='ArrowLeft')  lbShift(-1);
+  if (e.key==='Escape')     closeLightbox();
+});
+
+/* ── FAQ ── */
+function toggleFaq(btn) { btn.parentElement.classList.toggle('open'); }
+
+/* ── MODAL ── */
+function openModal()  { document.getElementById('modalOverlay').classList.add('open'); }
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
+function closeModalOutside(e) { if(e.target.id==='modalOverlay') closeModal(); }
+
+/* ── HAMBURGER / MOBILE NAV ── */
+function toggleMobileNav() {
+  document.getElementById('hamburger').classList.toggle('active');
+  document.getElementById('mobileNav').classList.toggle('open');
+  // fechar dropdown de compra se aberto
+  document.getElementById('opcoesCompra').classList.remove('open');
+}
+
+/* ── DROPDOWN COMPRAR ── */
+function toggleComprar(e) {
+  e.stopPropagation();
+  document.getElementById('opcoesCompra').classList.toggle('open');
+}
+document.addEventListener('click', () => {
+  document.getElementById('opcoesCompra').classList.remove('open');
+});
+</script>
+</body>
+</html>
