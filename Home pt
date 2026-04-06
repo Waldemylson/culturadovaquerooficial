@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rústicos Nobre - Boi Mija Pinga</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<style>
+:root{--verde:#1e4d1e;--verde2:#2a6b2a;--dourado:#c49a2e;--creme:#f5f0e8;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Lato',sans-serif;background:#fff;color:#333;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;display:block;}
+
+/* ── HEADER ── */
+header{
+  position:fixed;top:0;width:100%;z-index:1000;
+  background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1);
+  padding:10px 4%;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.logo-wrap{display:flex;align-items:center;gap:8px;}
+.logo-icon{font-size:2rem;line-height:1;}
+.logo-text{font-family:'Playfair Display',serif;font-size:1rem;line-height:1.2;color:var(--verde);}
+.logo-text span{display:block;font-size:.7rem;font-family:'Lato',sans-serif;color:#888;font-weight:400;}
+.nav-desktop{display:flex;align-items:center;gap:2px;list-style:none;}
+.nav-desktop li a{padding:7px 10px;border-radius:6px;font-size:.82rem;font-weight:700;color:#333;transition:.2s;}
+.nav-desktop li a:hover{background:var(--creme);color:var(--verde);}
+.has-drop{position:relative;}
+.has-drop>a::after{content:'▾';margin-left:3px;font-size:.65rem;}
+.drop-menu{
+  display:none;position:absolute;top:calc(100% + 6px);left:0;
+  background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.12);
+  border-radius:10px;min-width:200px;z-index:999;overflow:hidden;
+}
+.has-drop:hover .drop-menu{display:block;}
+.drop-menu a{display:flex;align-items:center;gap:10px;padding:13px 16px;font-size:.85rem;font-weight:700;border-bottom:1px solid #f0ebe0;transition:.2s;}
+.drop-menu a:last-child{border:none;}
+.drop-menu a:hover{background:var(--creme);color:var(--verde);}
+.header-right{display:flex;align-items:center;gap:10px;}
+.btn-comprar{background:var(--verde);color:#fff;padding:9px 20px;border-radius:50px;font-weight:700;font-size:.85rem;white-space:nowrap;transition:.2s;}
+.btn-comprar:hover{background:var(--verde2);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.hamburger span{display:block;width:24px;height:2.5px;background:var(--verde);border-radius:3px;}
+.mob-overlay{display:none;position:fixed;inset:0;z-index:998;}
+.mob-overlay.open{display:block;}
+.mobile-nav{display:none;position:fixed;top:60px;right:0;width:260px;background:#fff;box-shadow:-4px 8px 24px rgba(0,0,0,.13);border-radius:0 0 0 14px;z-index:999;overflow:hidden;}
+.mobile-nav.open{display:block;}
+.mobile-nav a{display:flex;align-items:center;gap:10px;padding:14px 20px;font-weight:700;font-size:.9rem;border-bottom:1px solid #f0ebe0;color:#333;}
+.mobile-nav a:hover{background:var(--creme);color:var(--verde);}
+.cat-sub a{padding-left:44px !important;font-size:.82rem !important;font-weight:400 !important;background:#faf7f0 !important;}
+@media(max-width:820px){.nav-desktop{display:none;}.hamburger{display:flex;}}
+
+/* ── HERO BANNER ── */
+.hero-banner{
+  margin-top:60px;
+  background:linear-gradient(135deg,#163716 0%,#2a6b2a 60%,#163716 100%);
+  padding:60px 6%;
+  display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;
+  min-height:300px;
+}
+.hero-text .tag{display:inline-block;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);padding:4px 14px;border-radius:50px;font-size:.73rem;font-weight:700;letter-spacing:.05em;margin-bottom:16px;text-transform:uppercase;}
+.hero-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3.8vw,2.5rem);color:#fff;line-height:1.25;margin-bottom:10px;}
+.hero-text p{color:rgba(255,255,255,.75);font-size:.9rem;margin-bottom:24px;}
+.btn-hero{display:inline-block;background:#fff;color:var(--verde);padding:12px 28px;border-radius:50px;font-weight:700;font-size:.9rem;}
+.hero-banner-img{font-size:8rem;flex:0 0 auto;text-align:center;}
+
+/* ── FEATURES ── */
+.features{background:var(--verde);padding:28px 5%;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.feat{text-align:center;color:#fff;}
+.feat .fi{font-size:1.8rem;margin-bottom:8px;}
+.feat h4{font-size:.83rem;font-weight:700;margin-bottom:4px;}
+.feat p{font-size:.72rem;opacity:.8;line-height:1.4;}
+@media(max-width:680px){.features{grid-template-columns:repeat(2,1fr);}}
+
+/* ── CATÁLOGO ── */
+.catalogo-sec{background:var(--creme);padding:50px 4%;}
+.sec-head{text-align:center;margin-bottom:30px;}
+.sec-head h2{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,3.2vw,1.9rem);color:var(--verde);margin-bottom:6px;line-height:1.3;}
+.sec-head p{font-size:.88rem;color:#777;}
+.owl-carousel .item{padding:6px;}
+.prod-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08);transition:.3s;}
+.prod-card:hover{transform:translateY(-4px);box-shadow:0 6px 20px rgba(0,0,0,.12);}
+.prod-img{width:100%;aspect-ratio:1/1;overflow:hidden;background:#e8dfc9;}
+.prod-img img{width:100%;height:100%;object-fit:cover;}
+.prod-body{padding:10px 12px 12px;text-align:center;}
+.prod-body h4{font-size:.88rem;font-weight:700;color:#222;margin-bottom:2px;}
+.prod-body p{font-size:.73rem;color:#999;}
+.owl-dots{margin-top:12px !important;}
+.owl-dot span{background:#ccc !important;width:8px !important;height:8px !important;}
+.owl-dot.active span{background:var(--verde) !important;}
+.owl-nav button{position:absolute;top:42%;transform:translateY(-50%);background:rgba(255,255,255,.9) !important;border-radius:50% !important;width:32px;height:32px;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+.owl-nav .owl-prev{left:-4px;}
+.owl-nav .owl-next{right:-4px;}
+.owl-nav button span{font-size:1.2rem;color:var(--verde);line-height:1;}
+
+/* ── POR QUE ESCOLHER ── */
+.porque{background:#fff;padding:64px 5%;}
+.porque-inner{max-width:960px;margin:0 auto;display:flex;gap:50px;flex-wrap:wrap;align-items:center;}
+.porque-txt{flex:1;min-width:260px;}
+.porque-txt .sub{font-family:'Playfair Display',serif;font-style:italic;font-size:1.25rem;color:var(--verde);margin-bottom:4px;}
+.porque-txt h2{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.8vw,2.1rem);color:#1a1a1a;margin-bottom:14px;}
+.porque-txt>p{font-size:.88rem;color:#555;line-height:1.7;margin-bottom:18px;}
+.pq-list{list-style:none;}
+.pq-list li{padding:11px 0;border-bottom:1px solid #eee;font-size:.86rem;line-height:1.5;}
+.pq-list li strong{color:var(--verde);display:block;margin-bottom:2px;font-size:.88rem;}
+.btn-verde{display:inline-block;margin-top:20px;background:var(--verde);color:#fff;padding:12px 26px;border-radius:50px;font-weight:700;font-size:.87rem;transition:.2s;}
+.btn-verde:hover{background:var(--verde2);}
+.porque-img{flex:0 0 200px;font-size:9rem;text-align:center;}
+@media(max-width:640px){.porque-img{display:none;}}
+
+/* ── TRANSFORME ── */
+.transforme{background:linear-gradient(135deg,#163716,#2a6b2a);padding:60px 5%;text-align:center;}
+.transforme h2{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.8vw,1.9rem);color:#fff;margin-bottom:6px;}
+.transforme>p{color:rgba(255,255,255,.75);font-size:.88rem;margin-bottom:38px;}
+.t-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:780px;margin:0 auto;}
+.t-card{background:rgba(255,255,255,.1);border-radius:14px;padding:28px 18px;color:#fff;}
+.t-tag{display:inline-block;background:rgba(255,255,255,.2);padding:3px 12px;border-radius:50px;font-size:.68rem;margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em;}
+.t-card h3{font-family:'Playfair Display',serif;font-size:1.25rem;margin-bottom:8px;}
+.t-num{font-size:2.4rem;font-weight:700;margin-bottom:4px;}
+.t-sub{font-size:.73rem;opacity:.7;}
+.btn-mini{display:inline-block;margin-top:14px;background:#fff;color:var(--verde);padding:8px 18px;border-radius:50px;font-weight:700;font-size:.78rem;}
+@media(max-width:580px){.t-cards{grid-template-columns:1fr;}}
+
+/* ── PROCESSO ── */
+.processo{background:var(--creme);padding:60px 5%;}
+.processo .sec-head h2{color:#1a1a1a;}
+.proc-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:960px;margin:34px auto 0;}
+.step{background:#fff;border-radius:14px;padding:28px 22px;box-shadow:0 3px 14px rgba(0,0,0,.06);}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--verde);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;margin-bottom:14px;}
+.step h3{font-size:1rem;color:var(--verde);margin-bottom:10px;}
+.step p{font-size:.83rem;color:#666;line-height:1.6;}
+.step a{display:inline-block;margin-top:14px;color:var(--verde);font-weight:700;font-size:.8rem;border-bottom:1px solid var(--verde);}
+@media(max-width:620px){.proc-steps{grid-template-columns:1fr;}}
+
+/* ── EQUIPE ── */
+.equipe{background:#fff;padding:60px 5%;text-align:center;}
+.equipe h2{font-family:'Playfair Display',serif;font-size:1.75rem;color:var(--verde);margin-bottom:10px;}
+.equipe .sub{font-size:.87rem;color:#777;max-width:600px;margin:0 auto 34px;}
+.eq-foto{width:100%;max-width:680px;margin:0 auto;border-radius:14px;overflow:hidden;background:#e8dfc9;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:5rem;}
+.eq-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:840px;margin:30px auto 0;text-align:left;}
+.eq-f{padding:18px;border-left:3px solid var(--verde);}
+.eq-f h4{color:var(--verde);font-size:.88rem;margin-bottom:6px;}
+.eq-f p{font-size:.81rem;color:#666;line-height:1.5;}
+@media(max-width:620px){.eq-feats{grid-template-columns:1fr;}}
+
+/* ── FAQ ── */
+.faq{background:var(--creme);padding:60px 5%;}
+.faq-head{text-align:center;margin-bottom:34px;}
+.faq-head h2{font-family:'Playfair Display',serif;font-size:1rem;color:#888;margin-bottom:4px;}
+.faq-head h3{font-family:'Playfair Display',serif;font-size:1.75rem;color:#1a1a1a;}
+.faq-list{max-width:680px;margin:0 auto;}
+.faq-item{background:#fff;border-radius:10px;margin-bottom:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.faq-q{width:100%;background:none;border:none;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;font-family:'Lato',sans-serif;font-weight:700;font-size:.87rem;color:#222;cursor:pointer;text-align:left;gap:10px;}
+.faq-q .arr{font-size:.9rem;transition:.3s;color:var(--verde);flex-shrink:0;}
+.faq-a{display:none;padding:0 18px 16px;font-size:.83rem;color:#666;line-height:1.65;}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open .arr{transform:rotate(180deg);}
+
+/* ── NEWSLETTER ── */
+.newsletter{background:linear-gradient(135deg,#163716,#2a6b2a);padding:50px 5%;text-align:center;}
+.newsletter h2{font-family:'Playfair Display',serif;color:#fff;font-size:1.5rem;margin-bottom:8px;}
+.newsletter p{color:rgba(255,255,255,.75);font-size:.87rem;margin-bottom:24px;}
+.nl-form{display:flex;max-width:420px;margin:0 auto;gap:8px;flex-wrap:wrap;justify-content:center;}
+.nl-form input{flex:1;min-width:200px;padding:12px 16px;border:none;border-radius:50px;font-size:.87rem;outline:none;}
+.nl-form button{background:var(--dourado);color:#fff;border:none;padding:12px 22px;border-radius:50px;font-weight:700;cursor:pointer;font-size:.87rem;}
+
+/* ── FOOTER ── */
+footer{background:#1a2e1a;padding:48px 5% 28px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;max-width:1080px;margin:0 auto;}
+.f-brand p{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.65;margin-top:10px;}
+footer h4{color:#fff;font-size:.82rem;margin-bottom:13px;text-transform:uppercase;letter-spacing:.05em;}
+footer ul{list-style:none;}
+footer ul li{margin-bottom:8px;}
+footer ul li a{color:rgba(255,255,255,.55);font-size:.79rem;transition:.2s;}
+footer ul li a:hover{color:#fff;}
+.f-contact p{color:rgba(255,255,255,.55);font-size:.79rem;line-height:1.7;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:34px;padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:.73rem;color:rgba(255,255,255,.35);}
+@media(max-width:680px){.footer-grid{grid-template-columns:1fr 1fr;}.f-brand{grid-column:1/-1;}}
+@media(max-width:380px){.footer-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ══════ HEADER ══════ -->
+<header>
+  <a href="#" class="logo-wrap">
+  <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/image__1_-removebg-preview%20(1).png" 
+     alt="Rústicos Nobre" style="height:105px; width:auto;">
+    <div class="logo-text">Rústicos Nobre<span>Arte rural esculpida à mão</span></div>
+  </a>
+
+  <ul class="nav-desktop">
+    <li><a href="#">Home</a></li>
+    <li><a href="#catalogo">Catálogo</a></li>
+    <li class="has-drop">
+      <a href="#">Categorias</a>
+      <div class="drop-menu">
+        <a href="#boi">🐂&nbsp; Boi Mija</a>
+        <a href="#cavalo">🐴&nbsp; Cavalo Mija</a>
+        <a href="#cabrita">🐐&nbsp; Cabrita Mija Pinga</a>
+      </div>
+    </li>
+    <li><a href="#equipe">Equipe</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="https://wa.link/zdxqdm">Suporte</a></li>
+  </ul>
+
+  <div class="header-right">
+   <button onclick="mostrarOpcoesCompra()" class="btn-comprar" style="position:relative;">Comprar Agora</button>
+
+<!-- Menu corrigido -->
+<div id="opcoesCompra" style="display:none; position:absolute; top:100%; right:0; background:#fff; border:1px solid #ddd; border-radius:12px; padding:10px 0; box-shadow:0 8px 25px rgba(0,0,0,0.2); z-index:9999; min-width:260px; margin-top:6px;">
+  
+  
+  
+  
+  
+  
+  <a href="https://wa.link/zdxqdm" target="_blank" style="display:block; padding:14px 20px; color:#222; text-decoration:none; font-weight:600; border-bottom:1px solid #f0f0f0;">💬 Falar no WhatsApp</a>
+  
+  <a href="https://wa.me/351939799936?text=Minha%20chave%20Pix%20%C3%A9%3A%20xtreambr@gmail.com" target="_blank" style="display:block; padding:14px 20px; color:#222; text-decoration:none; font-weight:600;">💰 Pagar com Mbway</a>
+</div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mob-overlay" id="mobOverlay"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#">🏠&nbsp; Home</a>
+  <a href="#catalogo">📦&nbsp; Catálogo</a>
+  <div class="cat-sub">
+    <a href="#boi">🐂&nbsp; Boi Mija</a>
+    <a href="#cavalo">🐴&nbsp; Cavalo Mija</a>
+    <a href="#cabrita">🐐&nbsp; Cabrita Mija Pinga</a>
+  </div>
+  <a href="#equipe">👥&nbsp; Equipe</a>
+  <a href="#sobre">ℹ️&nbsp; Sobre</a>
+  <a href="https://wa.me/5500000000000">💬&nbsp; Suporte</a>
+</nav>
+
+<!-- ══════ HERO BANNER ══════ -->
+<section class="hero-banner">
+  <div class="hero-text">
+    <span class="tag">Cultura do Vaquero apresenta</span>
+    <h2>Nova Coleção de Bois, Cabritas e Cavalos<br>Produzidas especialmente<br>pela Rústicos Nobre!</h2>
+    <p>Arte artesanal que celebra a tradição rural Portuguesa</p>
+    <a href="https://wa.link/zdxqdm" class="btn-hero">Faça agora o seu pedido</a>
+  </div>
+  <div class="hero-banner-img" style="position:relative; width:100%; max-width:420px; height:auto; overflow:hidden; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.25);">
+  <video 
+    autoplay 
+    muted 
+    loop 
+    playsinline 
+    style="width:100%; height:auto; object-fit:cover; display:block;">
+    
+    <!-- Seu vídeo do repositório -->
+    <source src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/20260122_122414239.mp4_play_BR.mp4" 
+            type="video/mp4">
+    
+    <!-- Fallback (imagem estática caso o vídeo não carregue) -->
+    <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/20260330_094250279.jpg_play_BR.jpg" 
+         alt="Boi Mija Pinga" style="width:100%; height:auto;">
+  </video>
+</div>
+</section>
+<!-- ENVIO CTT -->
+<section style="padding:30px 5%; background:#f5f0e8; text-align:center;">
+  
+  <h3 style="color:#1e4d1e; margin-bottom:15px;">
+    Calcule o Envio do seu pedido
+  </h3>
+
+  <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">
+    
+    <a href="https://appserver.ctt.pt/OnlineShipment/SimularEnviar" target="_blank"
+      style="background:#1e4d1e; color:#fff; padding:12px 20px; border-radius:8px; font-weight:600;">
+      📦 Calcular Envio CTT
+    </a>
+
+    <a href="https://appserver2.ctt.pt/feapl_2/app/open/postalCodeSearch/postalCodeSearch.jspx?lang=def" target="_blank"
+      style="background:#c49a2e; color:#fff; padding:12px 20px; border-radius:8px; font-weight:600;">
+      🔎 Não sei Código Postal
+    </a>
+
+  </div>
+
+  <p style="margin-top:10px; font-size:13px; color:#777;">
+    43cm de altura, 17cm de largura e 45cm de comprimento; peso 7 kilos
+  </p>
+
+</section>
+
+<!-- ══════ FEATURES ══════ -->
+<section class="features">
+  <div class="feat"><div class="fi">💳</div><h4>Parcele em até 10x no Wise</h4><p>Pagamento por Wise,Mb.</p></div>
+  <div class="feat"><div class="fi">🚚</div><h4>Envio para todo o Continente</h4><p>Entregamos em toda Portugal com excelência e qualidade.</p></div>
+  <div class="feat"><div class="fi">🕐</div><h4>Suporte 24h</h4><p>Atendimento personalizado 24 horas para você.</p></div>
+  <div class="feat"><div class="fi">🔒</div><h4>Compre sem sair de casa</h4><p>Compra segura e totalmente gerenciada pelo nosso sistema.</p></div>
+</section>
+
+
+<!-- ══════ CATÁLOGO ══════ -->
+<section class="catalogo-sec" id="catalogo">
+  <div class="sec-head">
+    <h2>Explore a nossa coleção exclusiva de<br>Boi mija pinga ,túnel de cachaça esculpidos à mão</h2>
+    <p>uma obra-prima que combina tradição e arte rural</p>
+  </div>
+  
+  <div class="owl-carousel owl-theme">
+
+    <!-- Item 1 a 30 - todas as suas imagens -->
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392810.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Artesanal • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392811.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Artesanal • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392812.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Edição Limitada</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392813.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>43cm × 45cm • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392814.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Edição Especial</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392815.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>43cm × 45cm • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392816.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Personalizado</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392817.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>43cm × 45cm • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392818.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Artesanal • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392819.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Edição Limitada</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/202604011439282.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>43cm × 45cm • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392820.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Personalizado</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392821.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Artesanal • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392822.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Edição Especial</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392823.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>43cm × 45cm • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392824.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Personalizado</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392825.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Artesanal • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392826.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Edição Limitada</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392827.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>43cm × 45cm • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392828.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Personalizado</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392829.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Edição Especial</p></div>
+      </div>
+    </div>
+
+    <!-- Itens 22 a 30 (continuação com os números restantes) -->
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/202604011439283.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Artesanal • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/2026040114392831.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Edição Limitada</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/202604011439284.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>43cm × 45cm • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/202604011439285.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Personalizado</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/202604011439286.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Artesanal • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/202604011439287.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Edição Especial</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/202604011439288.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>43cm × 45cm • 2L</p></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/202604011439289.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Personalizado</p></div>
+      </div>
+    </div>
+
+    <!-- Último item (30) -->
+    <div class="item">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/20260330_094250279.jpg_play_BR.jpg" alt="Boi Mija Pinga" loading="lazy">
+        </div>
+        <div class="prod-body"><h4>Boi Mija Pinga</h4><p>Modelo Especial</p></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════ POR QUE ESCOLHER ══════ -->
+<section class="porque" id="sobre">
+  <div class="porque-inner">
+    <div class="porque-txt">
+      <p class="sub">Por que Escolher o</p>
+      <h2> Boi Corote da<br>Rústicos Nobre?</h2>
+      <p>Na Rústicos Nobre, o processo de criação do "Touro Corote" é tão autêntico quanto a própria peça que produzimos.</p>
+      <ul class="pq-list">
+        <li><strong>Peças Únicas:</strong>Cada "Boi Mija Pinga" é uma peça única, refletindo a autenticidade das tradições agropecuárias.</li>
+        <li><strong>Qualidade Superior:</strong>Feitos com materiais selecionados para durabilidade e beleza excepcionais.</li>
+        <li><strong>Dimensões Premium:</strong>43cm de altura, 17cm de largura e 45cm de comprimento; capacidade de até 2 litros; base em madeira.</li>
+        <li><strong>Detalhes Personalizados:</strong>Personalização completa — cada detalhe pode ser inspirado em um animal real.</li>
+      </ul>
+      <a href="loja.html" class="btn-verde">Acesse nossa loja e conheça!</a>
+    </div>
+    <div class="porque-img">🐂</div>
+  </div>
+</section>
+
+<!-- ══════ TRANSFORME ══════ -->
+<section class="transforme">
+  <h2>Transforme Sua Casa com nosso querido "Boi Mija Pinga"</h2>
+  <p>Parcelamos em até 10 vezes sem juros e enviamos para toda Potugal,Ilha,Continente!</p>
+  <div class="t-cards">
+    <div class="t-card">
+      <div class="t-tag">Novas peças</div>
+      <h3>Boi Corote</h3>
+      <a href="https://wa.link/zdxqdm" class="btn-mini">Compre Agora</a>
+    </div>
+    <div class="t-card">
+      <div class="t-tag">Disponível</div>
+      <div class="t-num">50</div>
+      <div class="t-sub">unidades de pronta entrega</div>
+      <a href="https://wa.link/zdxqdm" class="btn-mini">Compre Agora</a>
+    </div>
+    <div class="t-card">
+      <div class="t-tag">100% Personalizado</div>
+      <h3>Personalize<br>do seu gosto</h3>
+      <a href="https://wa.link/zdxqdm" class="btn-mini">Compre Agora</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PROCESSO ══════ -->
+<section class="processo">
+  <div class="sec-head">
+    <h2>Conheça todo processo realizado antes do seu Touro Corote chegar até a sua casa</h2>
+  </div>
+  <div class="proc-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Fabricação</h3>
+      <p>A inspiração surge da conexão com a natureza rural. Organiza-se a parte hidráulica e estrutural com precisão, empregando ferragens para garantir solidez. Molda-se a massa em torno da estrutura.</p>
+      <a href="https://wa.link/zdxqdm">Acompanhe de pertinho →</a>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Personalização</h3>
+      <p>Após receber o pedido, esculpimos a peça com precisão. Após a secagem, preparamos para pintura aplicada à mão e finalizamos montando em base de madeira com acessórios especificados.</p>
+      <a href="https://wa.link/zdxqdm">Personalize o seu →</a>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Finalização e Envio</h3>
+      <p>Após minuciosa inspeção de qualidade, procedemos à embalagem cuidadosa protegendo a peça para transporte seguro, garantindo que chegue ao destino em condições ideais.</p>
+      <a href="https://wa.link/zdxqdm">Faça o seu pedido →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ EQUIPE ══════ -->
+<section class="equipe" id="equipe">
+  <h2>Conheça nossa equipe</h2>
+  <p class="sub">Nossa equipe de profissionais habilidosos e apaixonados é responsável por cada peça única que criamos, celebrando a tradição rural Portuguesa.</p>
+  <!-- ══════ EQUIPE ══════ -->
+<section class="equipe" id="equipe">
+  <h2>Conheça nossa equipe</h2>
+  <p class="sub">Nossa equipe de profissionais habilidosos e apaixonados é responsável por cada peça única que criamos, celebrando a tradição rural Potuguesa.</p>
+  
+  <div class="eq-foto">
+    <img src="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/202604030730261.jpg" 
+         alt="Equipe Rústicos Nobre" 
+         style="width:100%; height:100%; object-fit:cover; border-radius:14px;" 
+         loading="lazy">
+  </div>
+  
+ 
+  <div class="eq-feats">
+    <div class="eq-f"><h4>Compromisso com a Qualidade</h4><p>Desde a escolha dos materiais até o acabamento final, garantimos que cada peça seja feita com os mais altos padrões de qualidade.</p></div>
+    <div class="eq-f"><h4>Personalização e Atendimento</h4><p>Trabalhamos de perto com cada cliente para criar peças que reflitam suas preferências e estilo único.</p></div>
+    <div class="eq-f"><h4>Celebre a Cultura Rural</h4><p>Cada peça é uma homenagem à rica cultura rural de Portugal, capturando a essência do campo em cada detalhe.</p></div>
+  </div>
+</section>
+
+<!-- ══════ FAQ ══════ -->
+<section class="faq">
+  <div class="faq-head">
+    <h2>Confira abaixo as</h2>
+    <h3>Perguntas Frequentes</h3>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q">Como personalizo um produto? <span class="arr">▾</span></button>
+      <div class="faq-a">Todo produto personalizado deve ser consultado com um de nossos especialistas para que toda a personalização esteja de acordo com o gosto do cliente.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Quais as condições de pagamento? <span class="arr">▾</span></button>
+      <div class="faq-a">Pagamentos à vista via wise,Mb ,Transferrncia Iban ,Há também a possibilidade de dividir em até 10 vezes no Cartão de Crédito,.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Como rastrear minha entrega? <span class="arr">▾</span></button>
+      <div class="faq-a">Após embalar o pedido, enviaremos o código de rastreio via WhatsApp ou por e-mail para que acompanhe o percurso.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Qual é o material do touro corote? <span class="arr">▾</span></button>
+      <div class="faq-a">São utilizados: plástico, borracha, ferro, gesso, tinta a óleo, verniz e cabresto ornamentado com corrente e couro, sobre base de madeira.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Quais as medidas? <span class="arr">▾</span></button>
+      <div class="faq-a">43cm de altura, 17cm de largura, 45cm de comprimento, base de madeira 15cm × 35cm. Capacidade interna de até 2 litros.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Como será o processo de entrega? <span class="arr">▾</span></button>
+      <div class="faq-a">Enviado via CTT (PAC ou Sedex)  O cliente também pode levantar pessoalmente, informando a data com antecedência.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ NEWSLETTER ══════ -->
+<section class="newsletter">
+  <h2>Inscreva-se agora mesmo</h2>
+  <p>Gostaria de receber promoções e cupons?</p>
+  <div class="nl-form">
+    <input type="email" placeholder="Seu melhor e-mail">
+    <button>Inscrever-se</button>
+  </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="f-brand">
+      <div class="logo-wrap">
+        <div class="https://raw.githubusercontent.com/Waldemylson/boi-mija-pinga/main/image__1_-removebg-preview%20(1).png" style="font-size:1.8rem;">🐂</div>
+        <div class="logo-text" style="color:#fff;">Rústicos Nobre<span style="color:rgba(255,255,255,.45);">Arte rural esculpida à mão</span></div>
+      </div>
+      <p>Inovação no melhor do artesanato agro. Nosso compromisso é oferecer produtos únicos que celebram a tradição rural Portuguesa.</p>
+    </div>
+    <div>
+      <h4>Visite</h4>
+      <ul>
+        <li><a href="#">Página Inicial</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Categorias</h4>
+      <ul>
+        <li><a href="#boi">🐂 Boi Mija</a></li>
+        <li><a href="#cavalo">🐴 Cavalo Mija</a></li>
+        <li><a href="#cabrita">🐐 Cabrita Mija Pinga</a></li>
+      </ul>
+    </div>
+    <div class="f-contact">
+      <h4>Contato</h4>
+      <p>+351 939799936</p>
+      <p><a href="mailto:seuemail@gmail.com" style="color:rgba(255,255,255,.55);">rusticosmoveis12@gmail.com</a></p>
+      <p style="margin-top:8px;font-size:.74rem;opacity:.4;">Morada
+
+Estrada das Varzeas, Casal S. José 2070-002 Cartaxo-Santarém</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Copyright © 2024 Rústicos Nobre. Todos os direitos reservados</span>
+    <span>Arte e tradição rural Portuguesa</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script>
+// Carrossel
+$('.owl-carousel').owlCarousel({
+  loop:true,margin:12,nav:true,dots:true,
+  autoplay:true,autoplayTimeout:4500,autoplayHoverPause:true,
+  responsive:{0:{items:2},600:{items:3},1000:{items:4}}
+});
+
+// FAQ acordeão
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.parentElement;
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+
+// Menu mobile
+const hb=document.getElementById('hamburger');
+const mn=document.getElementById('mobileNav');
+const ov=document.getElementById('mobOverlay');
+const close=()=>{mn.classList.remove('open');ov.classList.remove('open');}
+hb.addEventListener('click',e=>{e.stopPropagation();mn.classList.toggle('open');ov.classList.toggle('open');});
+ov.addEventListener('click',close);
+mn.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+</script>
+<script>
+function mostrarOpcoesCompra() {
+  const menu = document.getElementById('opcoesCompra');
+  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+}
+
+// Fecha ao clicar fora
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('opcoesCompra');
+  if (!e.target.closest('button')) {
+    menu.style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>
