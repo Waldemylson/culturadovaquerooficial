@@ -181,6 +181,74 @@ footer ul li a:hover{color:#fff;}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:34px;padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:.73rem;color:rgba(255,255,255,.35);}
 @media(max-width:680px){.footer-grid{grid-template-columns:1fr 1fr;}.f-brand{grid-column:1/-1;}}
 @media(max-width:380px){.footer-grid{grid-template-columns:1fr;}}
+
+  /* ── VÍDEO FLUTUANTE (widde) ── */
+  #widde-video-container {
+    position: fixed;
+    bottom: 20px;
+    left: 80px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 9999;
+    box-shadow:
+      0 0 0 4px #6B3E26,
+      0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  #widde-video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: border-radius 0.2s;
+  }
+  .widde-buttons {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 10000;
+  }
+  .widde-buttons button {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow:
+      0 0 0 2px #6B3E26,
+      0 0 4px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0;
+  }
+  .widde-buttons button.buy-btn {
+    width: auto;
+    padding: 0 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    height: 36px;
+    gap: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      0 0 0 2px #6B3E26,
+      0 0 4px rgba(0,0,0,0.3);
+  }
+  .widde-buttons button.buy-btn span {
+    margin-left: 4px;
+    font-weight: bold;
+  }
+  .widde-buttons button:active { transform: scale(0.95); }
+  .whatsapp-icon { width: 20px; height: 20px; }
 </style>
 </head>
 <body>
@@ -758,7 +826,7 @@ footer ul li a:hover{color:#fff;}
     <div class="f-contact">
       <h4>Contato</h4>
       <p>+351 939799936</p>
-      <p><a href="mailto:seuemail@gmail.com" style="color:rgba(255,255,255,.55);">rusticosmoveis12@gmail.com</a></p>
+      <p><a href="/cdn-cgi/l/email-protection#98ebfdedfdf5f9f1f4d8fff5f9f1f4b6fbf7f5" style="color:rgba(255,255,255,.55);"><span class="__cf_email__" data-cfemail="403235333429232f332d2f36252933717200272d21292c6e232f2d">[email&#160;protected]</span></a></p>
       <p style="margin-top:8px;font-size:.74rem;opacity:.4;">Morada
 
 Estrada das Varzeas, Casal S. José 2070-002 Cartaxo-Santarém</p>
@@ -770,7 +838,7 @@ Estrada das Varzeas, Casal S. José 2070-002 Cartaxo-Santarém</p>
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script>
 // Carrossel
@@ -804,14 +872,66 @@ function mostrarOpcoesCompra() {
   const menu = document.getElementById('opcoesCompra');
   menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
 }
-
-// Fecha ao clicar fora
 document.addEventListener('click', function(e) {
   const menu = document.getElementById('opcoesCompra');
-  if (!e.target.closest('button')) {
+  if (menu && !e.target.closest('#opcoesCompra') && !e.target.closest('.btn-comprar')) {
     menu.style.display = 'none';
   }
 });
 </script>
+
+<!-- ══════ VÍDEO FLUTUANTE + BOTÕES ══════ -->
+<div id="widde-video-container">
+  <video id="widdeVideo" autoplay loop muted playsinline>
+    <source src="http://www.culturadovaquerooficial.pt/wp-content/uploads/2025/06/boivideo.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="widde-buttons">
+  <button onclick="window.open('https://wa.me/351939799936','_blank')" title="WhatsApp">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="whatsapp-icon">
+  </button>
+  <button onclick="toggleMute()" id="muteBtn" title="Som">🔊</button>
+  <button onclick="likeEffect()" id="likeBtn" title="Curtir">🤍</button>
+  <button onclick="navigator.clipboard.writeText(location.href); alert('Link copiado!');" title="Compartilhar">📤</button>
+  <button onclick="window.open('https://buy.stripe.com/14A7sLeJ6e9afVje0uafS11','_blank')" class="buy-btn" title="Comprar">
+    🛒<span>Comprar</span>
+  </button>
+</div>
+
+<script>
+(function() {
+  const vid = document.getElementById('widdeVideo');
+
+  function toggleMute() {
+    const b = document.getElementById('muteBtn');
+    vid.muted = !vid.muted;
+    b.textContent = vid.muted ? '🔇' : '🔊';
+  }
+  window.toggleMute = toggleMute;
+
+  function likeEffect() {
+    const b = document.getElementById('likeBtn');
+    b.textContent = b.textContent === '🤍' ? '❤️' : '🤍';
+  }
+  window.likeEffect = likeEffect;
+
+  vid.addEventListener('click', () => {
+    if (vid.requestFullscreen) vid.requestFullscreen();
+    else if (vid.webkitRequestFullscreen) vid.webkitRequestFullscreen();
+    else if (vid.msRequestFullscreen) vid.msRequestFullscreen();
+  });
+
+  document.addEventListener('fullscreenchange', () => {
+    vid.style.borderRadius = document.fullscreenElement === vid ? '0' : '50%';
+  });
+
+  vid.addEventListener('ended', () => {
+    vid.currentTime = 0;
+    vid.play();
+  });
+})();
+</script>
+
 </body>
-</html>
+  </html>
