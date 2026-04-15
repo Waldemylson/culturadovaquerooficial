@@ -1118,53 +1118,64 @@ document.addEventListener('click', () => {
   document.getElementById('opcoesCompra').classList.remove('open');
 });
 </script>
-  <div id="alertaFraude" style="
+<div id="alertaFraude" style="
   position:fixed;
   top:0;
   left:0;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.6);
-  display:none; /* Mudado de flex para none */
+  background:rgba(0,0,0,0.7);
+  display:none;
   align-items:center;
   justify-content:center;
   z-index:9999;
 ">
   <div style="
-    background:#d32f2f;
+    background:#b71c1c;
     color:white;
-    max-width:420px;
-    padding:25px;
-    border-radius:12px;
+    max-width:450px;
+    padding:30px;
+    border-radius:15px;
     text-align:center;
-    font-family:Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   ">
-    <h2>🚨 COMUNICADO IMPORTANTE</h2>
-    <p>Caros clientes,</p>
-    <p>Foram identificadas tentativas de fraude com utilização indevida do nosso nome.</p>
-    <p>⚠️ Pagamentos apenas para: <strong>WALDEMYLSON FERNANDES</strong>.</p>
+    <h2 style="margin-top:0;">🚨 COMUNICADO IMPORTANTE</h2>
+    <p>Estimados clientes,</p>
+    <p>Identificámos tentativas de fraude através da utilização indevida do nosso nome e marca.</p>
     
-    <div style="margin-top:15px;">
+    <p style="background:rgba(255,255,255,0.1); padding:15px; border-radius:8px; line-height:1.5;">
+      ⚠️ Os pagamentos devem ser efetuados <strong>exclusivamente</strong> ao artesão <br>
+      <strong>VALDEMYLCIO FERNANDES</strong> <br>
+      O diretor responsavel pelà empresa <br>
+      <strong>CULTURADO VAQUERO OFICIAL LDA</strong>.
+    </p>
+
+    <p style="font-size: 0.9em; margin-bottom:20px;"> Nós responsabilizamo-nos pelo envio CTT grátis e podes rastrear com código.</p>
+    
+    <div style="margin-top:20px;">
       <button onclick="fecharAlerta()" style="
-        padding:10px 18px;
+        padding:12px 20px;
         border:none;
         background:white;
-        color:#d32f2f;
+        color:#b71c1c;
         border-radius:6px;
         cursor:pointer;
         font-weight:bold;
-        margin-right:8px;
+        margin-right:10px;
+        transition: 0.3s;
       ">Compreendi</button>
 
       <a href="https://wa.link/zdxqdm" target="_blank" style="
-        padding:10px 18px;
+        padding:12px 20px;
         background:#25D366;
         color:white;
         border-radius:6px;
         text-decoration:none;
         font-weight:bold;
         display: inline-block;
+        transition: 0.3s;
       ">WhatsApp</a>
     </div>
   </div>
@@ -1173,18 +1184,18 @@ document.addEventListener('click', () => {
 <script>
   function fecharAlerta() {
     document.getElementById("alertaFraude").style.display = "none";
-    localStorage.setItem("alertaVisto", "true");
+    // Opcional: remover o comentário abaixo se quiser que o alerta apareça apenas uma vez por sessão
+    // localStorage.setItem("alertaVisto", "true");
   }
 
-  // Lógica de exibição corrigida
   window.addEventListener('DOMContentLoaded', (event) => {
     const jaVisto = localStorage.getItem("alertaVisto");
-    
     if (jaVisto !== "true") {
       document.getElementById("alertaFraude").style.display = "flex";
     }
   });
 </script>
+
 
 </body>
   </html>
